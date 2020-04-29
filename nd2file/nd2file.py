@@ -410,11 +410,15 @@ class ND2MultiDim(ND2Parser):
         if find_by_key(self.experiment, 'ppNextLevelEx'):
             self.experiment = find_by_key(self.experiment, 'ppNextLevelEx')['']
 
-        self._points = next(iter(
-            intmd for intmd in
-            find_all_by_key(self.experiment, 'Points')
-            if find_by_key(intmd, 'dPosName') is not None
-        ))['']
+        try:
+            self._points = next(iter(
+                intmd for intmd in
+                find_all_by_key(self.experiment, 'Points')
+                if find_by_key(intmd, 'dPosName') is not None
+            ))['']
+        except StopIteration:
+            # could not find multipoint data, apparently not a multipoint file. emulate
+            self._points = [{'dPFSOffset': 0.0, 'dPosX': 0.0, 'dPosY': 0.0, 'dPosZ': 0.0, 'dPosName': ''}]
 
         try:
             self.multipoints_of_experiment = [
@@ -431,7 +435,7 @@ class ND2MultiDim(ND2Parser):
                 for i, n in enumerate(self.multipoints_of_experiment):
                     self.multipoints_of_experiment[i]['valid'] = True
 
-        except KeyError:
+        except (KeyError, IndexError):
             self.multipoints_of_experiment = [{'valid': True}]
 
         self.multipoints = [p for p in self.multipoints_of_experiment if p['valid']]
@@ -466,6 +470,7 @@ class ND2MultiDim(ND2Parser):
 
     def image_singlechannel(self, multipoint=0, timepoint=0, channel=0):
         return self.image(multipoint=multipoint, timepoint=timepoint)[:, :, channel]
+
 
 if __name__ == '__main__':
     import sys
