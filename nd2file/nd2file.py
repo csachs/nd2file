@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2013-2016 Christian C. Sachs.
+# Copyright (c) 2013-2020 Christian C. Sachs.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
