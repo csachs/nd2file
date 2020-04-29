@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='nd2file',
-    version='0.0.1.dev1',
+    version='0.0.1.dev2',
     description='Access Nikon NIS-Elements ND2 files',
     long_description='see https://github.com/csachs/nd2file',
     author='Christian C. Sachs',
