@@ -289,7 +289,7 @@ class ND2Parser(object):
                 value = self.lv(pos, pos + l, t)
                 pos += l + t * 8
             else:
-                print("WARNING", thetype)
+                warnings.warn("Warning, unsupported type %r in serialized data." % (thetype,))
 
             if thename in result:
                 if type(result[thename]) == list:
