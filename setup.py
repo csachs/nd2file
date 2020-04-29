@@ -14,6 +14,7 @@ setup(
     author_email='sachs.christian@gmail.com',
     url='https://github.com/csachs/nd2file',
     packages=find_packages(),
+    requires=['numpy'],
     license='BSD',
     classifiers=[
         'Development Status :: 4 - Beta',
